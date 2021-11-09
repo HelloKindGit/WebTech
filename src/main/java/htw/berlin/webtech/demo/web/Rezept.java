@@ -11,19 +11,18 @@ public class Rezept {
     private Long id;
     private String name;
 
-
     public Rezept() {
     }
-    
+
     public Rezept(String name) {
         this.name = name;
     }
-    
+
     public Rezept(Long id, String name) {
         this.id = id;
         this.name = name;
     }
-    
+
     public Long getId() {
         return id;
     }
