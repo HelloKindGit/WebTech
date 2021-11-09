@@ -27,9 +27,7 @@ public class Rezept {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -58,4 +56,5 @@ public class Rezept {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
 }

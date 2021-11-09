@@ -2,6 +2,7 @@ package htw.berlin.webtech.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -46,9 +47,9 @@ public class RezeptService {
         Rezept rezept = rezeptRepository.findById(id).orElseThrow(() -> new IllegalStateException("Rezept mit angegebener id existiert nicht: " + id));
         if (name != null && name.length() > 0 && !Objects.equals(rezept.getName(), name)) {
             Optional<Rezept> studentOptional = rezeptRepository.findRezeptByName(name);
-            if (studentOptional.isPresent()) throw new IllegalStateException("Name existiert bereits");
+            if (studentOptional.isPresent())
+                throw new IllegalStateException("Rezept mit diesem Namen existiert bereits");
             rezept.setName(name);
         }
     }
-
 }
