@@ -40,8 +40,8 @@ public class RezeptController {
     }
 
     @PutMapping(path = "/{id}")
-    public void updateRezept(@PathVariable("id") String id, @RequestParam String name) {
+    public void updateRezept(@PathVariable("id") String id, @RequestBody Rezept rezept) {
         Long rezeptId = Long.parseLong(id);
-        rezeptService.updateRezept(rezeptId, name);
+        rezeptService.updateRezept(rezeptId, rezept);
     }
 }

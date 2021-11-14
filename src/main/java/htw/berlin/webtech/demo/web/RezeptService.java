@@ -45,7 +45,18 @@ public class RezeptService {
     }
 
     @Transactional
-    public void updateRezept(Long id, String name) {
+    public void updateRezept(Long id, Rezept rezept) {
+
+        var rezeptOptional = rezeptRepository.findById(id);
+        if (rezeptOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!");
+        }
+
+        var rezeptEnitity = rezeptOptional.get();
+        rezeptEnitity.setName(rezept.getName());
+        rezeptRepository.save(rezeptEnitity);
+
+        /*
         Rezept rezept = rezeptRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!"));
         if (name != null && name.length() > 0 && !Objects.equals(rezept.getName(), name)) {
             Optional<Rezept> studentOptional = rezeptRepository.findRezeptByName(name);
@@ -53,5 +64,6 @@ public class RezeptService {
                 throw new IllegalStateException("Rezept mit diesem Namen existiert bereits");
             rezept.setName(name);
         }
+         */
     }
 }
