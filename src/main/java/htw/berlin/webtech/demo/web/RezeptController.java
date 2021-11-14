@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/rezepte")
+@CrossOrigin("http://localhost:8081/")
 public class RezeptController {
 
     private final RezeptService rezeptService;
@@ -15,32 +17,31 @@ public class RezeptController {
         this.rezeptService = rezeptService;
     }
 
-    @GetMapping("/rezepte")
+    @GetMapping("/all")
     public List<Rezept> getRezepte() {
         return rezeptService.getRezepte();
     }
 
-    @GetMapping("/rezepte/get/{id}")
+    @GetMapping("{id}")
     public Rezept getRezeptById(@PathVariable String id) {
         Long rezeptId = Long.parseLong(id);
         return rezeptService.getRezeptById(rezeptId);
     }
 
-    @PostMapping("/rezepte/add")
+    @PostMapping("")
     public Rezept addNewRecipe(@RequestBody Rezept rezept) {
         return rezeptService.addNewRecipe(rezept);
     }
 
-    @DeleteMapping(path = "/rezepte/delete/{id}")
+    @DeleteMapping(path = "/{id}")
     public void deleteRecipe(@PathVariable String id) {
         Long rezeptId = Long.parseLong(id);
         rezeptService.deleteRecipe(rezeptId);
     }
 
-    @PutMapping(path = "/rezepte/update/{id}")
-    public void updateRezept(@PathVariable("id") String id, @RequestParam(required = false) String name) {
+    @PutMapping(path = "/{id}")
+    public void updateRezept(@PathVariable("id") String id, @RequestParam String name) {
         Long rezeptId = Long.parseLong(id);
-
         rezeptService.updateRezept(rezeptId, name);
     }
 }
