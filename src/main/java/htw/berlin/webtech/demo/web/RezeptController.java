@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/rezepte")
-@CrossOrigin("http://localhost:8081/")
 public class RezeptController {
 
     private final RezeptService rezeptService;
