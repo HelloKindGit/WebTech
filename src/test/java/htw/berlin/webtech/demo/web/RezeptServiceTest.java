@@ -1,5 +1,8 @@
 package htw.berlin.webtech.demo.web;
 
+import htw.berlin.webtech.demo.web.model.Rezept;
+import htw.berlin.webtech.demo.web.repository.RezeptRepository;
+import htw.berlin.webtech.demo.web.service.RezeptService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,7 @@
-package htw.berlin.webtech.demo.web;
+package htw.berlin.webtech.demo.web.controller;
 
+import htw.berlin.webtech.demo.web.service.RezeptService;
+import htw.berlin.webtech.demo.web.model.Rezept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

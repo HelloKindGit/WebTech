@@ -1,5 +1,7 @@
-package htw.berlin.webtech.demo.web;
+package htw.berlin.webtech.demo.web.service;
 
+import htw.berlin.webtech.demo.web.repository.RezeptRepository;
+import htw.berlin.webtech.demo.web.model.Rezept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -45,24 +47,16 @@ public class RezeptService {
 
     @Transactional
     public void updateRezept(Long id, Rezept rezept) {
-
         var rezeptOptional = rezeptRepository.findById(id);
         if (rezeptOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!");
         }
-
         var rezeptEnitity = rezeptOptional.get();
         rezeptEnitity.setName(rezept.getName());
+        rezeptEnitity.setBeschreibung(rezept.getBeschreibung());
+        rezeptEnitity.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
+        rezeptEnitity.setKochZeit(rezept.getKochZeit());
+        rezeptEnitity.setPortionen(rezept.getPortionen());
         rezeptRepository.save(rezeptEnitity);
-
-        /*
-        Rezept rezept = rezeptRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!"));
-        if (name != null && name.length() > 0 && !Objects.equals(rezept.getName(), name)) {
-            Optional<Rezept> studentOptional = rezeptRepository.findRezeptByName(name);
-            if (studentOptional.isPresent())
-                throw new IllegalStateException("Rezept mit diesem Namen existiert bereits");
-            rezept.setName(name);
-        }
-         */
     }
 }

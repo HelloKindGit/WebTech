@@ -1,5 +1,7 @@
 package htw.berlin.webtech.demo.web;
 
+import htw.berlin.webtech.demo.web.model.Rezept;
+import htw.berlin.webtech.demo.web.repository.RezeptRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

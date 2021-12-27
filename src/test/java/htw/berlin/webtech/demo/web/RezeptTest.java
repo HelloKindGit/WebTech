@@ -1,5 +1,6 @@
 package htw.berlin.webtech.demo.web;
 
+import htw.berlin.webtech.demo.web.model.Rezept;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
