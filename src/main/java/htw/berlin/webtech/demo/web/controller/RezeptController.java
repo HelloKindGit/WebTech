@@ -1,11 +1,12 @@
 package htw.berlin.webtech.demo.web.controller;
 
+import htw.berlin.webtech.demo.web.model.RezeptModel;
 import htw.berlin.webtech.demo.web.service.RezeptService;
 import htw.berlin.webtech.demo.web.model.Rezept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/rezepte")
@@ -19,12 +20,12 @@ public class RezeptController {
     }
 
     @GetMapping("/all")
-    public List<Rezept> getRezepte() {
+    public Set<RezeptModel> getRezepte() {
         return rezeptService.getRezepte();
     }
 
     @GetMapping("{id}")
-    public Rezept getRezeptById(@PathVariable String id) {
+    public RezeptModel getRezeptById(@PathVariable String id) {
         Long rezeptId = Long.parseLong(id);
         return rezeptService.getRezeptById(rezeptId);
     }

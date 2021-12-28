@@ -1,6 +1,7 @@
 package htw.berlin.webtech.demo.web;
 
 import htw.berlin.webtech.demo.web.model.Rezept;
+import htw.berlin.webtech.demo.web.model.RezeptModel;
 import htw.berlin.webtech.demo.web.repository.RezeptRepository;
 import htw.berlin.webtech.demo.web.service.RezeptService;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +31,7 @@ public class RezeptServiceTest {
 
         doReturn(Optional.of(r1)).when(repository).findById(42L);
 
-        Rezept actual = service.getRezeptById(42L);
+        RezeptModel actual = service.getRezeptById(42L);
 
         assertEquals(actual.getName(), "Gulasch mit Rotkohl");
     }

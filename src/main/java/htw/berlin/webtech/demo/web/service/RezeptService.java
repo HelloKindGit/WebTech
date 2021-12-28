@@ -1,5 +1,8 @@
 package htw.berlin.webtech.demo.web.service;
 
+import htw.berlin.webtech.demo.web.model.RezeptModel;
+import htw.berlin.webtech.demo.web.model.RezeptZuRezeptModel;
+import htw.berlin.webtech.demo.web.model.ZutatModel;
 import htw.berlin.webtech.demo.web.repository.RezeptRepository;
 import htw.berlin.webtech.demo.web.model.Rezept;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +11,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RezeptService {
 
     private final RezeptRepository rezeptRepository;
+    private final RezeptZuRezeptModel rezeptZuRezeptModel;
 
     @Autowired
-    public RezeptService(RezeptRepository rezeptRepository) {
+    public RezeptService(RezeptRepository rezeptRepository, RezeptZuRezeptModel rezeptZuRezeptModel) {
         this.rezeptRepository = rezeptRepository;
+        this.rezeptZuRezeptModel = rezeptZuRezeptModel;
     }
 
-    public List<Rezept> getRezepte() {
-        return (List<Rezept>) rezeptRepository.findAll();
+    public Set<RezeptModel> getRezepte() {
+        Set<Rezept> rezepte = new HashSet<>();
+        rezeptRepository.findAll().iterator().forEachRemaining(rezepte::add);
+
+        if (rezepte.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine Rezepte gefunden");
+        }
+
+        return rezepte.stream().map(rezeptZuRezeptModel::convert).collect(Collectors.toSet());
     }
 
-    public Rezept getRezeptById(Long id) {
-        return rezeptRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!"));
+    public RezeptModel getRezeptById(Long id) {
+        Optional<Rezept> rezeptOptional = rezeptRepository.findById(id);
+        if (rezeptOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!");
+        }
+        Rezept rezept = rezeptOptional.get();
+
+        return rezeptZuRezeptModel.convert(rezept);
     }
 
     public Rezept addNewRecipe(Rezept rezept) {
