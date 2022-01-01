@@ -67,16 +67,16 @@ public class RezeptService {
 
     @Transactional
     public void updateRezept(Long id, Rezept rezept) {
-        var rezeptOptional = rezeptRepository.findById(id);
+        Optional<Rezept> rezeptOptional = rezeptRepository.findById(id);
         if (rezeptOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!");
         }
-        var rezeptEnitity = rezeptOptional.get();
-        rezeptEnitity.setName(rezept.getName());
-        rezeptEnitity.setBeschreibung(rezept.getBeschreibung());
-        rezeptEnitity.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
-        rezeptEnitity.setKochZeit(rezept.getKochZeit());
-        rezeptEnitity.setPortionen(rezept.getPortionen());
+        Rezept rezeptEnitity = rezeptOptional.get();
+        if (rezept.getName() != null) rezeptEnitity.setName(rezept.getName());
+        if (rezept.getBeschreibung() != null) rezeptEnitity.setBeschreibung(rezept.getBeschreibung());
+        if (rezept.getVorbereitungsZeit() != null) rezeptEnitity.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
+        if (rezept.getKochZeit() !=null) rezeptEnitity.setKochZeit(rezept.getKochZeit());
+        if (rezept.getPortionen() != null) rezeptEnitity.setPortionen(rezept.getPortionen());
         rezeptRepository.save(rezeptEnitity);
     }
 }
