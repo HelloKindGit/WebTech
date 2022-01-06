@@ -2,7 +2,6 @@ package htw.berlin.webtech.demo.web.service;
 
 import htw.berlin.webtech.demo.web.model.RezeptModel;
 import htw.berlin.webtech.demo.web.model.RezeptZuRezeptModel;
-import htw.berlin.webtech.demo.web.model.ZutatModel;
 import htw.berlin.webtech.demo.web.repository.RezeptRepository;
 import htw.berlin.webtech.demo.web.model.Rezept;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -65,18 +63,42 @@ public class RezeptService {
         rezeptRepository.deleteById(id);
     }
 
-    @Transactional
     public void updateRezept(Long id, Rezept rezept) {
         Optional<Rezept> rezeptOptional = rezeptRepository.findById(id);
         if (rezeptOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rezept mit dieser Id wurde nicht gefunden!");
         }
         Rezept rezeptEnitity = rezeptOptional.get();
-        if (rezept.getName() != null) rezeptEnitity.setName(rezept.getName());
-        if (rezept.getBeschreibung() != null) rezeptEnitity.setBeschreibung(rezept.getBeschreibung());
-        if (rezept.getVorbereitungsZeit() != null) rezeptEnitity.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
-        if (rezept.getKochZeit() !=null) rezeptEnitity.setKochZeit(rezept.getKochZeit());
-        if (rezept.getPortionen() != null) rezeptEnitity.setPortionen(rezept.getPortionen());
+
+        if (rezept.getName().length() != 0) {
+            rezeptEnitity.setName(rezept.getName());
+        } else {
+            rezeptEnitity.setName(rezeptOptional.get().getName());
+        }
+
+        if (rezept.getBeschreibung().length() != 0) {
+            rezeptEnitity.setBeschreibung(rezept.getBeschreibung());
+        } else {
+            rezeptEnitity.setBeschreibung(rezeptOptional.get().getBeschreibung());
+        }
+
+        if (rezept.getVorbereitungsZeit() != null) {
+            rezeptEnitity.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
+        } else {
+            rezeptEnitity.setVorbereitungsZeit(rezeptOptional.get().getVorbereitungsZeit());
+        }
+
+        if (rezept.getKochZeit() !=null) {
+            rezeptEnitity.setKochZeit(rezept.getKochZeit());
+        } else {
+            rezeptEnitity.setKochZeit(rezeptOptional.get().getKochZeit());
+        }
+
+        if (rezept.getPortionen() != null) {
+            rezeptEnitity.setPortionen(rezept.getPortionen());
+        } else {
+            rezeptEnitity.setPortionen(rezeptOptional.get().getPortionen());
+        }
         rezeptRepository.save(rezeptEnitity);
     }
 }
