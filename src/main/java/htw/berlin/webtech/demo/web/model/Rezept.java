@@ -25,6 +25,10 @@ public class Rezept {
         this.name = name;
     }
 
+    public Rezept(Long id) {
+        this.id = id;
+    }
+
     public Rezept(Long id, String name, String beschreibung, Integer vorbereitungsZeit, Integer kochZeit, Integer portionen, String kategorie) {
         this.id = id;
         this.name = name;
@@ -37,6 +41,10 @@ public class Rezept {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -104,14 +112,7 @@ public class Rezept {
     @Override
     public String toString() {
         return "Rezept{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", beschreibung='" + beschreibung + '\'' +
-                ", vorbereitungsZeit=" + vorbereitungsZeit +
-                ", kochZeit=" + kochZeit +
-                ", portionen=" + portionen +
-                ", kategorie='" + kategorie + '\'' +
-                ", zutaten=" + zutaten +
+                "name='" + name + '\'' +
                 '}';
     }
 }

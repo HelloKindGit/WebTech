@@ -11,6 +11,13 @@ public class ZutatModel {
     public ZutatModel() {
     }
 
+    public ZutatModel(Long id, Long recipeId, String name, BigDecimal menge) {
+        this.id = id;
+        this.recipeId = recipeId;
+        this.name = name;
+        this.menge = menge;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,5 +48,15 @@ public class ZutatModel {
 
     public void setMenge(BigDecimal menge) {
         this.menge = menge;
+    }
+
+    @Override
+    public String toString() {
+        return "ZutatModel{" +
+                "id=" + id +
+                ", recipeId=" + recipeId +
+                ", name='" + name + '\'' +
+                ", menge=" + menge +
+                '}';
     }
 }

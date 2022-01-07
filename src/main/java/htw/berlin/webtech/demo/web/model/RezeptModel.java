@@ -16,6 +16,10 @@ public class RezeptModel {
     public RezeptModel() {
     }
 
+    public RezeptModel(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -78,5 +82,12 @@ public class RezeptModel {
 
     public void setZutaten(Set<ZutatModel> zutaten) {
         this.zutaten = zutaten;
+    }
+
+    @Override
+    public String toString() {
+        return "RezeptModel{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

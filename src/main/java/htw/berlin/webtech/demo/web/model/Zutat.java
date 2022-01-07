@@ -60,4 +60,13 @@ public class Zutat {
     public void setRezept(Rezept rezept) {
         this.rezept = rezept;
     }
+
+    @Override
+    public String toString() {
+        return "Zutat{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", menge=" + menge +
+                '}';
+    }
 }

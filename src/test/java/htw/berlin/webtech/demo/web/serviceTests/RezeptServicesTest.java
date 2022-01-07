@@ -1,21 +1,21 @@
-package htw.berlin.webtech.demo.web;
+package htw.berlin.webtech.demo.web.serviceTests;
 
 import htw.berlin.webtech.demo.web.model.Rezept;
 import htw.berlin.webtech.demo.web.model.RezeptModel;
 import htw.berlin.webtech.demo.web.repository.RezeptRepository;
 import htw.berlin.webtech.demo.web.service.RezeptService;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import static org.mockito.Mockito.doReturn;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doReturn;
+
 @SpringBootTest
-public class RezeptServiceTest {
+public class RezeptServicesTest {
 
     @Autowired
     private RezeptService service;
@@ -24,14 +24,12 @@ public class RezeptServiceTest {
     private RezeptRepository repository;
 
     @Test
-    @DisplayName("sollte ein Rezept über eine id finden")
-    void rezeptGet() {
+    public void rezeptGetById() {
         var r1 = new Rezept("Gulasch mit Rotkohl");
-        var r2 = new Rezept("Schweinebraten mit Sauerkraut");
 
-        doReturn(Optional.of(r1)).when(repository).findById(42L);
+        doReturn(Optional.of(r1)).when(repository).findById(1L);
 
-        RezeptModel actual = service.getRezeptById(42L);
+        RezeptModel actual = service.getRezeptById(1L);
 
         assertEquals(actual.getName(), "Gulasch mit Rotkohl");
     }

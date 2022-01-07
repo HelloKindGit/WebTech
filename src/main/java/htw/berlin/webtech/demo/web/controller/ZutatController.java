@@ -2,7 +2,6 @@ package htw.berlin.webtech.demo.web.controller;
 
 import htw.berlin.webtech.demo.web.model.Zutat;
 import htw.berlin.webtech.demo.web.model.ZutatModel;
-import htw.berlin.webtech.demo.web.service.RezeptService;
 import htw.berlin.webtech.demo.web.service.ZutatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
