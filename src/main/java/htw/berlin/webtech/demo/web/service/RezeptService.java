@@ -99,6 +99,13 @@ public class RezeptService {
         } else {
             rezeptEnitity.setPortionen(rezeptOptional.get().getPortionen());
         }
+
+        if (rezept.getKategorie() != null) {
+            rezeptEnitity.setKategorie(rezept.getKategorie());
+        } else {
+            rezeptEnitity.setKategorie(rezeptOptional.get().getKategorie());
+        }
+
         rezeptRepository.save(rezeptEnitity);
     }
 }

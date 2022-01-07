@@ -28,6 +28,7 @@ public class RezeptZuRezeptModel implements Converter<Rezept, RezeptModel> {
         rezeptModel.setVorbereitungsZeit(rezept.getVorbereitungsZeit());
         rezeptModel.setKochZeit(rezept.getKochZeit());
         rezeptModel.setPortionen(rezept.getPortionen());
+        rezeptModel.setKategorie(rezept.getKategorie());
 
         if (rezept.getZutaten() != null && rezept.getZutaten().size() > 0) {
             rezept.getZutaten()

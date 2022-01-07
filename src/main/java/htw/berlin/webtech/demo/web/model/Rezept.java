@@ -15,6 +15,7 @@ public class Rezept {
     private Integer vorbereitungsZeit;
     private Integer kochZeit;
     private Integer portionen;
+    private String kategorie;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rezept")
     private Set<Zutat> zutaten = new HashSet<>();
 
@@ -24,13 +25,14 @@ public class Rezept {
         this.name = name;
     }
 
-    public Rezept(Long id, String name, String beschreibung, Integer vorbereitungsZeit, Integer kochZeit, Integer portionen) {
+    public Rezept(Long id, String name, String beschreibung, Integer vorbereitungsZeit, Integer kochZeit, Integer portionen, String kategorie) {
         this.id = id;
         this.name = name;
         this.beschreibung = beschreibung;
         this.vorbereitungsZeit = vorbereitungsZeit;
         this.kochZeit = kochZeit;
         this.portionen = portionen;
+        this.kategorie = kategorie;
     }
 
     public Long getId() {
@@ -77,6 +79,14 @@ public class Rezept {
         this.portionen = portionen;
     }
 
+    public String getKategorie() {
+        return kategorie;
+    }
+
+    public void setKategorie(String kategorie) {
+        this.kategorie = kategorie;
+    }
+
     public Set<Zutat> getZutaten() {
         return zutaten;
     }
@@ -96,11 +106,12 @@ public class Rezept {
         return "Rezept{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", beschreibung='" + beschreibung + '\'' +
                 ", vorbereitungsZeit=" + vorbereitungsZeit +
                 ", kochZeit=" + kochZeit +
                 ", portionen=" + portionen +
+                ", kategorie='" + kategorie + '\'' +
                 ", zutaten=" + zutaten +
                 '}';
     }
-
 }

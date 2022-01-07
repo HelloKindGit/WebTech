@@ -10,6 +10,7 @@ public class RezeptModel {
     private Integer vorbereitungsZeit;
     private Integer kochZeit;
     private Integer portionen;
+    private String kategorie;
     private Set<ZutatModel> zutaten = new HashSet<>();
 
     public RezeptModel() {
@@ -61,6 +62,14 @@ public class RezeptModel {
 
     public void setPortionen(Integer portionen) {
         this.portionen = portionen;
+    }
+
+    public String getKategorie() {
+        return kategorie;
+    }
+
+    public void setKategorie(String kategorie) {
+        this.kategorie = kategorie;
     }
 
     public Set<ZutatModel> getZutaten() {
